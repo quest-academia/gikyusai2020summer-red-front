@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Home from './Home';
-import MyPage from './pages/MyPage';
-import CourseList from './pages/CourseList';
-import ApiTest from './pages/ApiTest';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Home from "./Home";
+import MyPage from "./pages/MyPage";
+import CourseList from "./pages/CourseList";
+import ApiTest from "./pages/ApiTest";
 
 function App() {
   return (
