@@ -17,13 +17,13 @@ function App() {
             <Link to="mypage">マイページ</Link>
             <Link to="/course-list">Course List</Link>
             <Link to="/api-test">API Test</Link>
-            <Link to="/course-detail">詳細</Link>
+            <Link to="/course-detail/1">詳細</Link>
           </div>
           <Route exact path="/" component={Home} />
           <Route exacr path="/mypage" component={MyPage} />
           <Route exact path="/course-list" component={CourseList} />
           <Route exact path="/api-test" component={ApiTest} />
-          <Route exact path="/course-detail" component={CourseDetail} />
+          <Route exact path="/course-detail/:id" component={CourseDetail} />
         </div>
       </Router>
     </div>

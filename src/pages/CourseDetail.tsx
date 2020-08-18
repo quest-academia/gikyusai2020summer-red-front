@@ -1,11 +1,29 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-class CourseDetail extends React.Component
+
+interface Props extends RouteComponentProps<{id: string}> {}
+interface State {
+  quest_id: number;
+}
+
+class CourseDetail extends React.Component<Props, State>
 {
+  constructor(props: Props) {
+    super(props);
+    let quest_id = Number(props.match.params.id);
+    if (isNaN(quest_id)) {
+      quest_id = 1
+    }
+    this.state = {
+      quest_id
+    };
+  }
   render()
   {
     return (
       <div>
+        <p>quest_id: { this.state.quest_id }</p>
         <h1>ルービックキューブ講座</h1>
         <p>3X3のルービックキューブを完成してみましょう</p>
           <div>

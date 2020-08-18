@@ -11,7 +11,7 @@ class CourseList extends React.Component {
          <Router>
           <div className="App">
             <div>
-              <Link to="/course-detail">詳細</Link>
+              <Link to="/course-detail/1">詳細</Link>
             </div>
           </div>
         </Router>
