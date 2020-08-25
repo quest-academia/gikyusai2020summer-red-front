@@ -53,3 +53,8 @@
 .navbar a:hover {
   text-decoration: underline;
 }
+
+.practice {
+  text-align:justify;
+  margin-left: 250px;
+}
