@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, RouteComponentProps } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import axious from "axios";
@@ -63,11 +63,11 @@ class CourseList extends React.Component<Props, State> {
           </Paper>
         </div>
         commentout-end @サブクエストを非表示 */}
-        
+
         <div className="QuestList">
           <h1>クエスト一覧</h1>
           {/* 選べるクエストを表示 */}
-          <Grid 
+          <Grid
           container
           spacing={0}
           direction="column"
@@ -75,21 +75,21 @@ class CourseList extends React.Component<Props, State> {
           justify="center"
           style={{ minHeight: '50vh' }}
           >
-            
+
             {this.state.data.map((d) => {
               const url = "/course-detail/" + d.id;
               return (
                 <Paper variant="outlined" elevation={5}>
                 <p>
-                  <a className="link-to-courcedetail" href={url}>
+                  <Link className="link-to-courcedetail" to={url}>
                     {d.title}
                     {d.id}
-                  </a>
+                  </Link>
                 </p>
                 </Paper>
               );
             })}
-            
+
           </Grid>
         </div>
       </div>
