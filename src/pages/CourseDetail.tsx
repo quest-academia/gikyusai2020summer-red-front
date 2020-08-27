@@ -5,7 +5,6 @@ import { RouteComponentProps } from 'react-router-dom';
 interface Props extends RouteComponentProps<{ id: string }> { }
 interface State {
   quest_id: number;
-  json: string;
   title: string;
   data: any;
   subquests: Array<any>;
@@ -20,7 +19,6 @@ class CourseDetail extends React.Component<Props, State> {
     }
     this.state = {
       quest_id,
-      json: '',
       title: '',
       data: {},
       subquests: [],
@@ -28,13 +26,11 @@ class CourseDetail extends React.Component<Props, State> {
     axious
       .get("https://gikyusai-red.herokuapp.com/api/v1/quests/" + quest_id)
       .then((response: any) => {
-        const json: string = JSON.stringify(response.data, null, "    ");
         const subquests = response.data.data.subquests as Array<any>;
         
         console.log(subquests);
         
         this.setState({
-          json,
           title: response.data.data.title,
           data: response.data.data,
           subquests,
