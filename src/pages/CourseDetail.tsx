@@ -1,9 +1,14 @@
 import React from 'react';
+import axious from "axios";
 import { RouteComponentProps } from 'react-router-dom';
 
 interface Props extends RouteComponentProps<{ id: string }> { }
 interface State {
   quest_id: number;
+  json: string;
+  title: string;
+  data: any;
+  subquests: Array<any>;
 }
 
 class CourseDetail extends React.Component<Props, State> {
@@ -14,42 +19,49 @@ class CourseDetail extends React.Component<Props, State> {
       quest_id = 1;
     }
     this.state = {
-      quest_id
+      quest_id,
+      json: '',
+      title: '',
+      data: {},
+      subquests: [],
     };
+    axious
+      .get("https://gikyusai-red.herokuapp.com/api/v1/quests/" + quest_id)
+      .then((response: any) => {
+        const json: string = JSON.stringify(response.data, null, "    ");
+        const subquests = response.data.data.subquests as Array<any>;
+        
+        console.log(subquests);
+        
+        this.setState({
+          json,
+          title: response.data.data.title,
+          data: response.data.data,
+          subquests,
+        });
+      });
   }
   render() {
     return (
       <div>
-        <h1>ルービックキューブ講座</h1>
-        <p>3X3のルービックキューブを完成してみましょう</p>
+        <h1>{this.state.data.title}</h1>
+        <p>{this.state.data.description}</p>
         <div>
           <div>
             <div>
-              <h2>総合演習</h2>
+              <h2>Sub Quests</h2>
             </div>
             <div>
               <div>
-                <ul className="practice">
-                 <p className="practice2">
-                    <a href="#1">1:1面とその側面1段目を揃えよう！</a>
-                  </p>
-                </ul>
-                <ul className="practice">
-                  <p className="practice2">
-                    <a href="#2">2:上面を揃えよう！</a>
-                  </p>
-                </ul>
-
-                <ul className="practice">
-                  <p className="practice2">
-                    <a href="#3">3:上面4隅の位置を揃えよう！</a>
-                  </p>
-                </ul>
-                <ul className="practice">
-                  <p className="practice2">
-                    <a href="#4">4:6面完成してみよう</a>
-                  </p>
-                </ul>
+                {this.state.subquests.map(subquest => {
+                  return (
+                    <ul className="practice">
+                      <p className="practice2">
+                        <a href="#1">{ subquest.title }</a>
+                      </p>
+                    </ul>
+                  )
+                })}
               </div>
             </div>
           </div>
