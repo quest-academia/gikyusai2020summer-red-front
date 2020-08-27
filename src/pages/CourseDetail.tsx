@@ -6,6 +6,7 @@ interface Props extends RouteComponentProps<{ id: string }> { }
 interface State {
   quest_id: number;
   title: string;
+  image_url: string;
   data: any;
   subquests: Array<any>;
 }
@@ -20,6 +21,7 @@ class CourseDetail extends React.Component<Props, State> {
     this.state = {
       quest_id,
       title: '',
+      image_url: '',
       data: {},
       subquests: [],
     };
@@ -28,11 +30,12 @@ class CourseDetail extends React.Component<Props, State> {
       .then((response: any) => {
         const subquests = response.data.data.subquests as Array<any>;
         
-        console.log(subquests);
+        console.log(response.data.data);
         
         this.setState({
           title: response.data.data.title,
           data: response.data.data,
+          image_url: response.data.data.image.url,
           subquests,
         });
       });
@@ -42,6 +45,9 @@ class CourseDetail extends React.Component<Props, State> {
       <div>
         <h1>{this.state.data.title}</h1>
         <p>{this.state.data.description}</p>
+        <figure>
+          <img src={this.state.image_url} alt=""/>
+        </figure>
         <div>
           <div>
             <div>
@@ -51,7 +57,7 @@ class CourseDetail extends React.Component<Props, State> {
               <div>
                 {this.state.subquests.map(subquest => {
                   return (
-                    <ul className="practice">
+                    <ul className="practice" key={subquest.id}>
                       <p className="practice2">
                         <a href="#1">{ subquest.title }</a>
                       </p>
