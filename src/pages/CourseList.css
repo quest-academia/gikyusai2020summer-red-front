@@ -1,0 +1,21 @@
+.QuestList {
+
+}
+
+.QuestListTitle {
+    color : blue;
+ }
+
+.Quest {
+  margin: 0 auto;
+  text-align: center;
+  line-height: 2;
+}
+
+.link-to-courcedetail {
+  display: inline-block;
+  text-align: left;
+  font-size: 24px;
+  background-color: greenyellow;
+  border: solid 2px skyblue;
+}

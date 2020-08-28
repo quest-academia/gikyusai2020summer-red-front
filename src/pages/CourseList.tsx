@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, RouteComponentProps } from "react
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import axious from "axios";
+import "./CourseList.css";
 
 type Props = RouteComponentProps<{ id: string }>;
 interface ResponseData {
@@ -15,6 +16,7 @@ interface ResponseData {
 }
 interface State {
   data: ResponseData[];
+  image_url: string;
 }
 
 class CourseList extends React.Component<Props, State> {
@@ -26,6 +28,7 @@ class CourseList extends React.Component<Props, State> {
     }
     this.state = {
       data: [],
+      image_url: "",
     };
     (async () => {
       const res = await axious.get(
@@ -65,32 +68,20 @@ class CourseList extends React.Component<Props, State> {
         commentout-end @サブクエストを非表示 */}
 
         <div className="QuestList">
-          <h1>クエスト一覧</h1>
+          <h1 className="QuestListTitle">クエスト一覧</h1>
           {/* 選べるクエストを表示 */}
-          <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '50vh' }}
-          >
-
+            <div className="Quest">
             {this.state.data.map((d) => {
               const url = "/course-detail/" + d.id;
               return (
-                <Paper variant="outlined" elevation={5}>
                 <p>
                   <Link className="link-to-courcedetail" to={url}>
                     {d.title}
-                    {d.id}
                   </Link>
                 </p>
-                </Paper>
               );
             })}
-
-          </Grid>
+            </div>
         </div>
       </div>
     );
